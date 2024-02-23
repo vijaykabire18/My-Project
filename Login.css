@@ -1,0 +1,75 @@
+body { 
+	display: flex; 
+	align-items: center; 
+	justify-content: center; 
+	font-family: sans-serif; 
+	line-height: 1.5; 
+	min-height: 100vh; 
+	background: whitesmoke; 
+	flex-direction: column; 
+	margin-top: 12px; 
+	margin-bottom: 12px;
+	background-image: linear-gradient(to right, Blue, black);
+} 
+.main { 
+	background-color: #fff; 
+	background-color: transparent; 
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+	padding: 10px 20px; 
+	transition: transform 0.2s; 
+	width:500px;
+	text-align: center; 
+} 
+label { 
+	display: block; 
+	width: 100%; 
+	margin-top: 10px; 
+	margin-bottom: 5px; 
+	text-align: left; 
+	color: #555; 
+	font-weight: bold; 
+	color: #fff;
+} 
+input { 
+	display: block; 
+	width: 100%; 
+	height: 45px;
+	margin-bottom: 15px; 
+	padding: 10px; 
+	box-sizing: border-box; 
+	border: 1px solid #ddd; 
+	border-radius: 5px;
+	background: transparent; 
+	color: #fff;
+	font-size: small;
+} 
+.logo {
+    width: 130px;
+}
+.btn {
+	width: 49%;
+}
+
+
+@media (max-width: 900px) {
+    .main {
+		width: 300px;
+	}
+    input[type=text], input[type=password] {
+		height: 34px;
+		font-size: smaller;
+	}
+	label {
+		font-size: smaller;
+		font-family: sans-serif;
+	}
+	.btn {
+		width: 100%;
+	}
+	.avatar {
+		
+		width: 75px;
+
+	}
+}
+   
