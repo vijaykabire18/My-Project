@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Details</title>
+    <style>
+        /* Basic CSS for styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .video-info {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Video Details</h1>
+        <div class="video-info">
+            <label for="title">Title:</label>
+            <div id="title"></div>
+            
+            <label for="description">Description:</label>
+            <div id="description"></div>
+            
+            <label for="url">URL:</label>
+            <div id="url"></div>
+            
+            <label for="userId">User ID:</label>
+            <div id="userId"></div>
+            
+            <label for="thumbnail">Thumbnail:</label>
+            <div id="thumbnail"></div>
+            
+            <label for="createdAt">Created At:</label>
+            <div id="createdAt"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Sample video object (Replace this with actual data fetched from backend)
+        const video = {
+            title: "Sample Video",
+            description: "This is a sample video description.",
+            url: "https://www.example.com/sample-video",
+            userId: "user123",
+            thumbnail: "https://www.example.com/thumbnail.jpg",
+            createdAt: new Date().toISOString()
+        };
+
+        // Update DOM with video information
+        document.getElementById("title").textContent = video.title;
+        document.getElementById("description").textContent = video.description;
+        document.getElementById("url").innerHTML = `<a href="${video.url}" target="_blank">${video.url}</a>`;
+        document.getElementById("userId").textContent = video.userId;
+        document.getElementById("thumbnail").innerHTML = `<img src="${video.thumbnail}" alt="Thumbnail" style="max-width: 200px;">`;
+        document.getElementById("createdAt").textContent = new Date(video.createdAt).toLocaleString();
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comment App</title>
+</head>
+<body>
+  <h1>Comment App</h1>
+  
+  <h2>Create Comment</h2>
+  <form id="createCommentForm">
+    <label for="comment">Comment:</label><br>
+    <input type="text" id="comment" name="comment"><br>
+    <label for="userId">User ID:</label><br>
+    <input type="text" id="userId" name="userId"><br>
+    <button type="submit">Submit</button>
+  </form>
+  
+  <h2>Comments for Video</h2>
+  <div id="comments"></div>
+  
+  <script>
+    // Function to create a comment
+    async function createComment(event) {
+      event.preventDefault();
+      const comment = document.getElementById("comment").value;
+      const userId = document.getElementById("userId").value;
+      
+      try {
+        const response = await fetch(`/api/comments/${userId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ comment })
+        });
+        
+        const data = await response.json();
+        console.log(data);
+        alert(data.message);
+        document.getElementById("createCommentForm").reset(); // Reset the form
+      } catch (error) {
+        console.error("Error creating comment:", error);
+        alert("Error creating comment. Please try again.");
+      }
+    }
+    
+    // Function to fetch comments for a video
+    async function fetchComments(videoId) {
+      try {
+        const response = await fetch(`/api/comments/${videoId}`);
+        const data = await response.json();
+        console.log(data);
+        
+        const commentsContainer = document.getElementById("comments");
+        commentsContainer.innerHTML = ""; // Clear previous comments
+        
+        data.comment.forEach(comment => {
+          const commentElement = document.createElement("div");
+          commentElement.textContent = comment.comment;
+          commentsContainer.appendChild(commentElement);
+        });
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+        alert("Error fetching comments. Please try again.");
+      }
+    }
+    
+    // Event listener for form submission
+    document.getElementById("createCommentForm").addEventListener("submit", createComment);
+    
+    // Fetch comments for a video upon page load (replace 'videoId' with actual video ID)
+    fetchComments('videoId');
+  </script>
+</body>
+</html>

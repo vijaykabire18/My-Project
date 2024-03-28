@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Play Video-Movie Shots</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -53,6 +53,7 @@
                                 <span class="post-rating-count">0</span>
                             </div>
                             <a href=""><img src="C:\Users\vijay\OneDrive\Documents\Pictures\Media19\3917372.png">Save</a>
+        
                             <!------------------------------Share-button----------------------------------------------------------------------->
                             <div class="share-dialog">
                                 <header>
@@ -186,7 +187,7 @@
                     </div>
                 </div>
 
-                <div class="old-comment">
+                <div class="old-comment" method="post" >
                     <img src="C:\Users\vijay\OneDrive\Documents\Pictures\Screenshots\Screenshot (31).png">
                     <div>
                         <h3>Vijay Kabire <span>2 Days ago</span></h3>
@@ -338,7 +339,55 @@
 <!-------------------------------------------------------Right-sidebar-End-------------------------------------------------------------------->
 </div>   
 </div>
+<!--Below-Script-starts------------------------------------------------------------------------------------------------------------------------------------>
+<script>
+ //------------------------------------Like and Dislike------------------------------------------------------------//
 
+    document.querySelectorAll(".post").forEach(post => {
+	const postId = post.dataset.postId;
+	const ratings = post.querySelectorAll(".post-rating");
+	const likeRating = ratings[0];
+
+	ratings.forEach(rating => {
+	const button = rating.querySelector(".post-rating-button");
+	const count = rating.querySelector(".post-rating-count");
+
+	button.addEventListener("click", async () => {
+	    if (rating.classList.contains("post-rating-selected")) {
+		return;
+		}
+		count.textContent = Number(count.textContent) + 1;
+		ratings.forEach(rating => {
+		if (rating.classList.contains("post-rating-selected")) {
+		const count = rating.querySelector(".post-rating-count");
+		count.textContent = Math.max(0, Number(count.textContent) - 1);
+		rating.classList.remove("post-rating-selected");
+		}
+		});
+		rating.classList.add("post-rating-selected");
+		const likeOrDislike = likeRating === rating ? "like" : "dislike";
+		const response = await fetch(`/posts/${postId}/${likeOrDislike}`);
+		const body = await response.json();
+		});
+	});
+});
+//------------------------------End-Script------------------------------------------------------------------------//
+//-----Next-Script-------------------//
+//-------------------------------------------------------------------------Share-Button-----------------------------------------------------------------------------//
+const shareButton = document.querySelector('.share-button');
+const shareDialog = document.querySelector('.share-dialog');
+const closeButton = document.querySelector('.close-button');
+
+shareButton.addEventListener('click', event => {
+shareDialog.classList.add('is-open');
+});
+closeButton.addEventListener('click', event => {
+shareDialog.classList.remove('is-open');
+});
+//---------------------------End-Script------------------------------------//
+</script>
+<!--End-Script-------------------------------------------------------------------------------------------------------------------------------------------------------->
+<script src="script.js" defer></script>
 
 </body>
 </html>
